@@ -5,40 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tehno News — Главная</title>
 
-    <!-- Код подтверждения для Яндекс Вебмастера -->
+    <!-- Код подтверждения Яндекс Вебмастера -->
     <meta name="yandex-verification" content="d7a8c08cc847c459" />
 
     <style>
-      /* Базовые настройки */
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { 
-        font-family: Arial, sans-serif; 
-        margin: 0; 
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
         padding: 0;
-        background-color: #f4f4f4;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+        overflow-x: hidden;
       }
 
-      /* Основной контент */
+      /* Чёрный экран-заглушка */
+      .overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #000;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 1s ease-out;
+      }
+
+      /* Надпись на чёрном экране */
+      .welcome-text {
+        color: #fff;
+        font-size: 3rem;
+        text-align: center;
+        padding: 20px;
+        transform: translateY(40px);
+        opacity: 0;
+        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease-out;
+      }
+
+      /* Основной блок сайта */
       .page-wrapper {
         width: 100%;
-        /* Фон страницы */
         background-image: url('https://images.unsplash.com/photo-1542359374-6ba6124bf90b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-        background-size: cover; 
+        background-size: cover;
         background-position: center;
-        filter: brightness(0.4); 
-        display: flex; 
-        flex-direction: column; 
+        filter: brightness(0.4);
+        display: flex;
+        flex-direction: column;
         align-items: center;
         padding-top: 80px;
         padding-bottom: 50px;
-        flex: 1; /* Чтобы футер был внизу, если контента мало */
+        flex: 1;
       }
 
       h1 {
-        color: #fff; 
+        color: #fff;
         text-shadow: 0 2px 6px rgba(0,0,0,0.7);
         font-size: 3rem;
         margin-bottom: 10px;
@@ -46,38 +66,41 @@
       }
 
       p.subtitle {
-        color: #ddd; 
+        color: #ddd;
         margin-top: 10px;
         font-size: 1.2rem;
         text-align: center;
       }
 
-      .buttons-container { 
-        display: flex; 
-        gap: 20px; 
-        margin-top: 40px; 
+      .buttons-container {
+        display: flex;
+        gap: 20px;
+        margin-top: 40px;
         flex-wrap: wrap;
         justify-content: center;
       }
 
+      /* Кнопки: тёмно-золотой цвет, прямоугольник, тёмный текст */
       .nav-btn {
-        padding: 15px 30px; 
-        font-size: 1rem; 
-        cursor: pointer; 
+        padding: 15px 30px;
+        font-size: 1rem;
+        cursor: pointer;
         text-decoration: none;
-        border: none;
-        background: rgba(255, 255, 255, 0.9); 
-        color: #333; 
-        border-radius: 6px;
+        border: 2px solid #8b6e1a; /* Тёмная рамка под золото */
+        background: #cfa32a;        /* Тёмно-золотой фон */
+        color: #222;               /* Тёмный текст для контраста */
+        border-radius: 4px;         /* Чуть скруглённые углы, но форма остаётся прямоугольной */
         font-weight: bold;
-        transition: background 0.3s, transform 0.2s;
+        font-family: Arial, sans-serif;
+        transition: background 0.3s, transform 0.2s, border-color 0.3s;
         display: inline-block;
       }
 
-      .nav-btn:hover { 
-        background: #fff; 
+      .nav-btn:hover {
+        background: #e6b833;        /* Чуть светлее при наведении */
+        border-color: #a58520;     /* Рамка чуть светлее */
         transform: scale(1.05);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       }
 
       footer {
@@ -93,7 +116,12 @@
   </head>
   <body>
 
-    <!-- Основной блок сайта (без экрана загрузки) -->
+    <!-- Чёрный экран с надписью -->
+    <div class="overlay" id="overlay">
+      <div class="welcome-text" id="welcome">Добро пожаловать на Tehno News</div>
+    </div>
+
+    <!-- Основной контент сайта -->
     <div class="page-wrapper" id="page">
       <h1>Tehno News</h1>
       <p class="subtitle">Свежие технологические новости, аналитика, финансы</p>
@@ -109,5 +137,21 @@
       &copy; 2026 Tehno News. Все права защищены.
     </footer>
 
+    <script>
+      setTimeout(() => {
+        const welcome = document.getElementById('welcome');
+        const overlay = document.getElementById('overlay');
+
+        welcome.style.transform = 'translateY(0)';
+        welcome.style.opacity = '1';
+
+        setTimeout(() => {
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 1000);
+        }, 2000);
+      }, 500);
+    </script>
   </body>
 </html>
