@@ -18,7 +18,7 @@
         min-height: 100vh;
         overflow-x: hidden;
 
-        /* ВОТ ТУТ ФОН С ОСЕННИМ ЛЕСОМ */
+        /* ФОН: ОСЕННИЙ ЛЕС */
         background-image: url('https://images.unsplash.com/photo-1501854140884-07485039718a?q=80&w=2070&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
@@ -26,7 +26,7 @@
         background-repeat: no-repeat;
       }
 
-      /* Чёрный экран-заглушка для анимации */
+      /* Чёрный экран-заглушка для анимации входа */
       .overlay {
         position: fixed;
         top: 0; left: 0; width: 100%; height: 100%;
@@ -65,7 +65,7 @@
         content: "";
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.55); /* затемнение 55% */
+        background: rgba(0, 0, 0, 0.55);
         z-index: 0;
         pointer-events: none;
       }
@@ -133,9 +133,47 @@
   </head>
   <body>
 
-    <!-- Экран с приветствием -->
+    <!-- Экран с приветствием (анимация) -->
     <div class="overlay" id="overlay">
       <div class="welcome-text" id="welcome">Добро пожаловать на Tehno News</div>
     </div>
 
-    <!
+    <!-- Основной контент сайта -->
+    <div class="page-wrapper">
+      <div class="content-box">
+        <h1>Tehno News</h1>
+        <p class="subtitle">Свежие технологические новости, всемирные новости, помощь малым бизнесом</p>
+
+        <div class="buttons-container">
+          <a href="news.html" class="nav-btn">Новости</a>
+          <a href="tehno-news.html" class="nav-btn">Технологические новости</a>
+          <a href="business-help.html" class="nav-btn">Помощь бизнесу</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2026 Tehno News. Все права защищены.
+    </footer>
+
+    <script>
+      // Анимация появления
+      setTimeout(() => {
+        const welcome = document.getElementById('welcome');
+        const overlay = document.getElementById('overlay');
+
+        // Вылет надписи
+        welcome.style.transform = 'translateY(0)';
+        welcome.style.opacity = '1';
+
+        // Через 2 секунды начинаем убирать чёрный экран
+        setTimeout(() => {
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 1000);
+        }, 2000);
+      }, 500);
+    </script>
+  </body>
+</html>
